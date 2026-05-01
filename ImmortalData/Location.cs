@@ -10,13 +10,22 @@ namespace Data
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }
-		public HashSet<ELocationAction> actions { get; set; } = new();
+		public Dictionary<ELocationAction, LocationActionData> Actions { get; set; } = new();
 
-		public Location(string id, string name, List<ELocationAction> actions)
+		public Location(string id, string name)
 		{
 			Id = id;
 			Name = name;
-			foreach (ELocationAction action in actions) actions.Add(action);
+		}
+
+		public void AddAction(LocationActionData action)
+		{
+			Actions.Add(action.ActionType, action);
+		}
+
+		public void AddActions(List<LocationActionData> actions)
+		{
+			foreach (var action in actions) AddAction(action);
 		}
 	}
 }

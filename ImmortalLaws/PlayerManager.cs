@@ -12,6 +12,6 @@ namespace Laws
 
 		public PlayerData PlayerData { get; set; }
 
-		public double Age => PlayerData.GetAge();
+		public double Age => PlayerData.GetAge(Core);
 	}
 }

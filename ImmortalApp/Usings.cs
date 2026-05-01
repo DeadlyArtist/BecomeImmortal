@@ -4,3 +4,4 @@ global using Data;
 global using Laws;
 global using Sys;
 global using Acts;
+global using App;

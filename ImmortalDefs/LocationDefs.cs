@@ -10,16 +10,40 @@ namespace Defs
 	public static class LocationDefs
 	{
 		public static List<Location> All = new();
-		public static Location RuinedCity { get; } = Define(nameof(RuinedCity), [Explore, Scavenge]);
-		public static Location Sewers { get; } = Define(nameof(Sewers), [Explore, Hunt]);
-		public static Location Laboratory { get; } = Define(nameof(Laboratory), [Scavenge]);
-		public static Location Outskirts { get; } = Define(nameof(Outskirts), [Explore, Scavenge, Forage, Hunt]);
-		public static Location Forest { get; } = Define(nameof(Forest), [Explore, Forage, Hunt]);
-		public static Location Mountains { get; } = Define(nameof(Mountains), [Explore, Forage, Hunt]);
+		public static Location RuinedCity { get; } = Define(nameof(RuinedCity));
+		public static Location Sewers { get; } = Define(nameof(Sewers));
+		public static Location Laboratory { get; } = Define(nameof(Laboratory));
+		public static Location Outskirts { get; } = Define(nameof(Outskirts));
+		public static Location Forest { get; } = Define(nameof(Forest));
+		public static Location Mountains { get; } = Define(nameof(Mountains));
 
-		public static Location Define(string id, List<ELocationAction> actions)
+		public static void Setup()
 		{
-			var item = new Location(id, id.ToTextCase(), actions);
+			RuinedCity.AddAction(new LocationActionData(Explore, new LootTable([])));
+			RuinedCity.AddAction(new LocationActionData(Scavenge, new LootTable([])));
+
+			Sewers.AddAction(new LocationActionData(Explore, new LootTable([])));
+			Sewers.AddAction(new LocationActionData(Hunt, new LootTable([])));
+
+			Laboratory.AddAction(new LocationActionData(Explore, new LootTable([])));
+
+			Outskirts.AddAction(new LocationActionData(Explore, new LootTable([])));
+			Outskirts.AddAction(new LocationActionData(Scavenge, new LootTable([])));
+			Outskirts.AddAction(new LocationActionData(Forage, new LootTable([])));
+			Outskirts.AddAction(new LocationActionData(Hunt, new LootTable([])));
+
+			Forest.AddAction(new LocationActionData(Explore, new LootTable([])));
+			Forest.AddAction(new LocationActionData(Forage, new LootTable([])));
+			Forest.AddAction(new LocationActionData(Hunt, new LootTable([])));
+
+			Mountains.AddAction(new LocationActionData(Explore, new LootTable([])));
+			Mountains.AddAction(new LocationActionData(Forage, new LootTable([])));
+			Mountains.AddAction(new LocationActionData(Hunt, new LootTable([])));
+		}
+
+		public static Location Define(string id)
+		{
+			var item = new Location(id, id.ToTextCase());
 			All.Add(item);
 			return item;
 		}
